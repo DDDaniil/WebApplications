@@ -51,9 +51,9 @@ namespace MyFirstWebApplication.Pages.Account
                 {
                     user = new User { Email = Rmodel.Email, Password = Rmodel.Password };
                     
-                    //Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
-                    //if (userRole != null)
-                    //    user.Role = userRole;
+                    /*Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    if (userRole != null)
+                        user.Role = userRole;*/
                     
                     db.Users.Add(user);
                     await db.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace MyFirstWebApplication.Pages.Account
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
+              //  new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
             };
             
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

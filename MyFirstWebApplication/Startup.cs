@@ -35,7 +35,15 @@ namespace MyFirstWebApplication
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddControllersWithViews();
+            
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Index");
+            });
+            
         }
+        
+        
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
