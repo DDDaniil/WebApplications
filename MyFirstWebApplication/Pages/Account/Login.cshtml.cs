@@ -29,8 +29,8 @@ namespace MyFirstWebApplication.Pages.Account
         public Lmodel Lmodel { get; set; }
 
 
-        private UserContext db;
-        public LoginModel(UserContext context)
+        private ApplicationContext db;
+        public LoginModel(ApplicationContext context)
         {
             db = context;
         }

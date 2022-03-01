@@ -12,9 +12,9 @@ namespace MyFirstWebApplication.Pages.Users
 {
     public class IndexModel : PageModel
     {
-        private readonly MyFirstWebApplication.Data.UserContext _context;
+        private readonly MyFirstWebApplication.Data.ApplicationContext _context;
 
-        public IndexModel(MyFirstWebApplication.Data.UserContext context)
+        public IndexModel(MyFirstWebApplication.Data.ApplicationContext context)
         {
             _context = context;
         }

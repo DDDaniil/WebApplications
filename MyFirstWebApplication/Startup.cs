@@ -26,7 +26,7 @@ namespace MyFirstWebApplication
         {
             services.AddRazorPages();
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<Data.ApplicationContext>(options => options.UseSqlServer(connection));
  
             // установка конфигурации подключения
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

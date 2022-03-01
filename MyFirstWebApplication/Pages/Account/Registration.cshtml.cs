@@ -32,8 +32,8 @@ namespace MyFirstWebApplication.Pages.Account
         [BindProperty]
         public Rmodel Rmodel { get; set; }
 
-        private UserContext db;
-        public RegisterModel(UserContext context)
+        private ApplicationContext db;
+        public RegisterModel(ApplicationContext context)
         {
             db = context;
 

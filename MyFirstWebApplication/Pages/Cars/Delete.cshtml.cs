@@ -12,9 +12,9 @@ namespace MyFirstWebApplication.Pages.Cars
 {
     public class DeleteModel : PageModel
     {
-        private readonly MyFirstWebApplication.Data.UserContext _context;
+        private readonly MyFirstWebApplication.Data.ApplicationContext _context;
 
-        public DeleteModel(MyFirstWebApplication.Data.UserContext context)
+        public DeleteModel(MyFirstWebApplication.Data.ApplicationContext context)
         {
             _context = context;
         }

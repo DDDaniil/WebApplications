@@ -13,9 +13,9 @@ namespace MyFirstWebApplication.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly MyFirstWebApplication.Data.UserContext _context;
+        private readonly MyFirstWebApplication.Data.ApplicationContext _context;
 
-        public EditModel(MyFirstWebApplication.Data.UserContext context)
+        public EditModel(MyFirstWebApplication.Data.ApplicationContext context)
         {
             _context = context;
         }

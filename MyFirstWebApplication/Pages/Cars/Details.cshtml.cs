@@ -12,9 +12,9 @@ namespace MyFirstWebApplication.Pages.Cars
 {
     public class DetailsModel : PageModel
     {
-        private readonly MyFirstWebApplication.Data.UserContext _context;
+        private readonly MyFirstWebApplication.Data.ApplicationContext _context;
 
-        public DetailsModel(MyFirstWebApplication.Data.UserContext context)
+        public DetailsModel(MyFirstWebApplication.Data.ApplicationContext context)
         {
             _context = context;
         }
