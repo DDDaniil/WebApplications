@@ -19,13 +19,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Категории</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Категории</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Авторизация</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Registration">Регистрация</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Регистрация</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <p>Привет, @User.Identity.Name ваша роль @User.Claims.FirstOrDefault(x => x.Type == System.Security.Claims.ClaimsIdentity.DefaultRoleClaimType).Value  </p>
+                                <a href="/Account/Logout"> Выйти </a>
+                            }
+                            else
+                            {
+                                <a href="/Account/Login"> Логин </a>
+                                <a href="/Account/Register"> Регистрация </a>
+                            }
                         </li>
                     </ul>
                 </div>

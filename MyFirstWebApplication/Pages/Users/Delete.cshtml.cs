@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MyFirstWebApplication.Models;
 
 namespace MyFirstWebApplication.Pages.Users
 {
+    [Authorize(Roles = "admin")]
     public class DeleteModel : PageModel
     {
         private readonly MyFirstWebApplication.Data.ApplicationContext _context;
@@ -29,7 +31,8 @@ namespace MyFirstWebApplication.Pages.Users
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = await _context.Users
+                .Include(u => u.Role).FirstOrDefaultAsync(m => m.Id == id);
 
             if (User == null)
             {

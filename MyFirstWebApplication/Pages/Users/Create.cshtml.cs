@@ -23,8 +23,8 @@ namespace MyFirstWebApplication.Pages.Users
 
         public IActionResult OnGet()
         {
-            //ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
-
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
+           
             return Page();
         }
 

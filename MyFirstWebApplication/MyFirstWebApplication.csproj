@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Meal" />
+    <Folder Include="Migrations\" />
     <Folder Include="Pages\Account\" />
   </ItemGroup>
 

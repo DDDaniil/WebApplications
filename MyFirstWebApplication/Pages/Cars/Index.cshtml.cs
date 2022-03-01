@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using MyFirstWebApplication.Models;
 
 namespace MyFirstWebApplication.Pages.Cars
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly MyFirstWebApplication.Data.ApplicationContext _context;
@@ -21,9 +23,9 @@ namespace MyFirstWebApplication.Pages.Cars
 
         public IList<ArticleModel> ArticleModel { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string TopicId)
         {
-            ArticleModel = await _context.ArticleModels.ToListAsync();
+            ArticleModel = await _context.ArticleModels.Where(t => t.TopicId == TopicId).ToListAsync();
         }
     }
 }

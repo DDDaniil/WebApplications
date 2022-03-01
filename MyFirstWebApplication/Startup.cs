@@ -27,14 +27,19 @@ namespace MyFirstWebApplication
             services.AddRazorPages();
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<Data.ApplicationContext>(options => options.UseSqlServer(connection));
- 
-            // установка конфигурации подключения
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/AccessDenied");
                 });
-            services.AddControllersWithViews();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminsOnly", policy =>
+                    policy.RequireRole("admin"));
+            });
             
             services.AddRazorPages(options =>
             {
@@ -59,7 +64,7 @@ namespace MyFirstWebApplication
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 

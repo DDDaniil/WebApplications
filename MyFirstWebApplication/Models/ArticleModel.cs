@@ -9,6 +9,7 @@ namespace MyFirstWebApplication.Models
         public string Author { get; set; }
         public DateTime PublicationDate { get; set; }
         public string TopicId { get; set; }
+
     }
     
 }

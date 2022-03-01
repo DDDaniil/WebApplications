@@ -28,7 +28,8 @@ namespace MyFirstWebApplication.Pages.Users
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = await _context.Users
+                .Include(u => u.Role).FirstOrDefaultAsync(m => m.Id == id);
 
             if (User == null)
             {

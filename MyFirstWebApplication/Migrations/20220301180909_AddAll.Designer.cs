@@ -10,8 +10,8 @@ using MyFirstWebApplication.Data;
 namespace MyFirstWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220301080143_Initial")]
-    partial class Initial
+    [Migration("20220301180909_AddAll")]
+    partial class AddAll
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,21 @@ namespace MyFirstWebApplication.Migrations
                     b.ToTable("ArticleModels");
                 });
 
+            modelBuilder.Entity("MyFirstWebApplication.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("MyFirstWebApplication.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -61,9 +76,21 @@ namespace MyFirstWebApplication.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MyFirstWebApplication.Models.User", b =>
+                {
+                    b.HasOne("MyFirstWebApplication.Models.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

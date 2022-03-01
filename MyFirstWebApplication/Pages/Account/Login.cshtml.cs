@@ -41,11 +41,11 @@ namespace MyFirstWebApplication.Pages.Account
 
         public async Task<IActionResult> OnPost()
         {
-                            /*.Include(u=>u.Role)*/
+
             if (ModelState.IsValid)
             {
-                User user = await db.Users
-                     .FirstOrDefaultAsync(u => u.Email == Lmodel.Email && u.Password == Lmodel.Password);
+                User user = await db.Users.Include(u=>u.Role)
+                    .FirstOrDefaultAsync(u => u.Email == Lmodel.Email && u.Password == Lmodel.Password);
                 if (user != null)
                 {
                     await Authenticate(user); 
@@ -66,7 +66,7 @@ namespace MyFirstWebApplication.Pages.Account
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-              //  new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             

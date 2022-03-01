@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using MyFirstWebApplication.Models;
 
 namespace MyFirstWebApplication.Pages.Users
 {
+    [Authorize(Roles = "admin")]
     public class EditModel : PageModel
     {
         private readonly MyFirstWebApplication.Data.ApplicationContext _context;
@@ -20,8 +22,7 @@ namespace MyFirstWebApplication.Pages.Users
             _context = context;
         }
 
-        [BindProperty]
-        public User User { get; set; }
+        [BindProperty] public User User { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,17 +31,18 @@ namespace MyFirstWebApplication.Pages.Users
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = await _context.Users
+                .Include(u => u.Role).FirstOrDefaultAsync(m => m.Id == id);
 
             if (User == null)
             {
                 return NotFound();
             }
+
+            ViewData["RoleId"] = new SelectList(_context.Roles, "Id", "Name");
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
